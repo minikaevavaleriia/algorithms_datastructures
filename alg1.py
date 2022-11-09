@@ -284,6 +284,86 @@
 # def pascal_piramid
 
 
+# графы  кол-во ребер на 1 меньше чем кол-во вершин
+
+# def findCenter(edges):
+#     n = len(edges) + 1
+#     matrix = [[0] * n for _ in range(n)]
+#
+#     for edge in edges:
+#         v1, v2 = edge
+#         matrix[v1-1][v2-1] = 1
+#         matrix[v2 - 1][v1 - 1] = 1
+#
+#     # for row in enumerate(matrix):
+#     #     if sum(row) == n - 1:
+#     #         return i+1
+#
+#     for i in range(len(matrix)):
+#         if sum(matrix[i]) == n - 1:
+#             return i+1
+#
+#
+# print(findCenter([[1,2], [2,3], [4,2]]))
+
+
+# обход в глубину
+def is_connected(matrix):
+    start_point = 0
+    visited = {start_point}
+    stack = [start_point]
+    while stack:
+        cur_vertex = stack.pop()
+
+        row = matrix[cur_vertex]
+        for i in range(len(row)):
+            if (row[i] == 1) and (i not in visited):
+                stack.append(i)
+                visited.add(i)
+    return visited
+#
+# print(is_connected(
+#     [
+#         [0, 1, 1, 0, 0],
+#         [1, 0, 1, 0, 1],
+#         [1, 1, 0, 0, 0],
+#         [0, 0, 0, 0, 1],
+#         [0, 1, 0, 1, 0]
+#     ]
+# ))
+
+
+def deep_first_search(start_point, matrix):
+    visited = {start_point}
+    stack = [start_point]
+    while stack:
+        cur_vertex = stack.pop()
+
+        row = matrix[cur_vertex]
+        for i in range(len(row)):
+            if (row[i] == 1) and (i not in visited):
+                stack.append(i)
+                visited.add(i)
+    return visited
+
+
+def components(matrix):
+    res = []
+    for i in range(len(matrix)):
+        comp = deep_first_search(i, matrix)
+        if comp not in res:
+            res.append(comp)
+    return res
+
+
+print(components([
+        [0, 1, 1, 0, 1],
+        [1, 0, 1, 0, 0],
+        [1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0]
+    ]))
+
 
 
 
