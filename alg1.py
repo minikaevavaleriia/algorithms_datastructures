@@ -214,7 +214,7 @@
 # print(res)
 
 
-#генерация скобочных последовательностей
+# генерация скобочных последовательностей
 # res = []
 # def brackets_generate(seq, n, opened, closed):
 #     if len(seq) == n:
@@ -308,19 +308,19 @@
 
 
 # обход в глубину
-def is_connected(matrix):
-    start_point = 0
-    visited = {start_point}
-    stack = [start_point]
-    while stack:
-        cur_vertex = stack.pop()
-
-        row = matrix[cur_vertex]
-        for i in range(len(row)):
-            if (row[i] == 1) and (i not in visited):
-                stack.append(i)
-                visited.add(i)
-    return visited
+# def is_connected(matrix):
+#     start_point = 0
+#     visited = {start_point}
+#     stack = [start_point]
+#     while stack:
+#         cur_vertex = stack.pop()
+#
+#         row = matrix[cur_vertex]
+#         for i in range(len(row)):
+#             if (row[i] == 1) and (i not in visited):
+#                 stack.append(i)
+#                 visited.add(i)
+#     return visited
 #
 # print(is_connected(
 #     [
@@ -333,44 +333,155 @@ def is_connected(matrix):
 # ))
 
 
-def deep_first_search(start_point, matrix):
-    visited = {start_point}
-    stack = [start_point]
-    while stack:
-        cur_vertex = stack.pop()
-
-        row = matrix[cur_vertex]
-        for i in range(len(row)):
-            if (row[i] == 1) and (i not in visited):
-                stack.append(i)
-                visited.add(i)
-    return visited
-
-
-def components(matrix):
-    res = []
-    for i in range(len(matrix)):
-        comp = deep_first_search(i, matrix)
-        if comp not in res:
-            res.append(comp)
-    return res
+# def deep_first_search(start_point, matrix):
+#     visited = {start_point}
+#     stack = [start_point]
+#     while stack:
+#         cur_vertex = stack.pop()
+#
+#         row = matrix[cur_vertex]
+#         for i in range(len(row)):
+#             if (row[i] == 1) and (i not in visited):
+#                 stack.append(i)
+#                 visited.add(i)
+#     return visited
 
 
-print(components([
-        [0, 1, 1, 0, 1],
-        [1, 0, 1, 0, 0],
-        [1, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0]
-    ]))
+# def components(matrix):
+#     res = []
+#     for i in range(len(matrix)):
+#         comp = deep_first_search(i, matrix)
+#         if comp not in res:
+#             res.append(comp)
+#     return res
+#
+#
+# print(components([
+#         [0, 1, 1, 0, 1],
+#         [1, 0, 1, 0, 0],
+#         [1, 1, 0, 0, 0],
+#         [0, 0, 0, 0, 0],
+#         [1, 0, 0, 0, 0]
+#     ]))
 
 
+# обход в ширину
+# def bfs(start_point, matrix):
+#     seen = {start_point}
+#     q = [start_point]
+#     while q:
+#         cur_vertex = q.pop(0)
+#         # print(cur_vertex)
+#         row = matrix[cur_vertex]
+#         for i in range(len(row)):
+#             if (row[i] > 0) and (i not in seen):
+#                 q.append(i)
+#                 seen.add(i)
+#     return seen
+#
+#
+# print(bfs(0, [
+#         [0, 1, 1, 0, 1],
+#         [1, 0, 1, 0, 0],
+#         [1, 1, 0, 0, 0],
+#         [0, 0, 0, 0, 0],
+#         [1, 0, 0, 0, 0]
+#     ]))
 
 
+#  алгоритм деикстры
+# def minimum_path(start, matrix):
+#     visited = set()
+#     q = [start]
+#     path_lengths = [2**32] * len(matrix)
+#     path_lengths[start] = 0
+#     path = [[start]] * len(matrix)
+#     while q:
+#         cur_node = q.pop(0)
+#         visited.add(cur_node)
+#
+#         row = matrix[cur_node]
+#         for i in range(len(row)):
+#             if row[i] > 0 and path_lengths[i] > path_lengths[cur_node] + row[i]:
+#                 path_lengths[i] = path_lengths[cur_node] + row[i]
+#                 path[i] = path[cur_node] + [i]
+#
+#             if row[i] > 0 and i not in visited:
+#                 visited.add(i)
+#                 q.append(i)
+#     return path
+#
+#
+# print(minimum_path(0, [
+#         [0, 3, 2, 0, 1],
+#         [3, 0, 4, 0, 0],
+#         [2, 2, 0, 12, 0],
+#         [0, 3, 16, 0, 7],
+#         [1, 5, 7, 8, 9]
+#     ]))
 
 
+# def floodFill(image, sr, sc, color):
+#
+# # ПОСМОТРЕТЬ КОД В ЭЛЖУРЕ, ТАМ ЦИКЛ ПРОЩЕ
+#
+#
+#     old_color = image[sr][sc]
+#     stack = [[sr, sc]]
+#     seen = {(sr, sc)}
+#     while stack:
+#         row, col = stack.pop()
+#         image[row][col] = color
+#
+#         if row == 0:
+#             pass
+#         elif ((row - 1, col) not in seen) and image[row - 1, col] == old_color:
+#             stack.append((row - 1, col))
+#             seen.add((row - 1, col))
+#
+#         if row == len(image) - 1:
+#             pass
+#         elif ((row + 1, col) not in seen) and image[row + 1, col] == old_color:
+#             stack.append((row + 1, col))
+#             seen.add((row + 1, col))
+#
+#         if col == 0:
+#             pass
+#         elif ((row, col - 1) not in seen) and image[row, col - 1] == old_color:
+#             stack.append((row, col - 1))
+#             seen.add((row, col - 1))
+#
+#         if col == len(image[0]) - 1:
+#             pass
+#         elif ((row, col + 1) not in seen) and image[row, col + 1] == old_color:
+#             stack.append((row, col + 1))
+#             seen.add((row, col + 1))
+#
+#         return image
+#
+#
+# print(floodFill([
+#         [0, 1, 1, 0, 1],
+#         [1, 0, 1, 0, 0],
+#         [1, 1, 0, 0, 0],
+#         [0, 0, 0, 0, 0],
+#         [1, 0, 0, 0, 0]], 1, 1, 2))
 
 
+# def maxAreaofIsland(image):
+#     start_point = (2, 1)
+#     stack = [start_point]
+#     seen = {start_point}
+#     S = 0
+#     while stack:
+#         row, col = stack.pop()
+#         S += 1
+#         for new_row, new_col in (row - 1, col), (row + 1, col), (row, col - 1), (row, col + 1):
+#             if 0 <= new_col < len(image[0]) and 0 <= new_row < len(image) and \
+#                     ((new_row, new_col) not in seen) and image[new_row][new_col] == 1:
+#                 stack.append((new_row, new_col))
+#                 seen.add((new_row, new_col))
+#     return S
 
 
 
