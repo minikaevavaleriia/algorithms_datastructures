@@ -43,28 +43,28 @@ class BinarySearchTree():
         return None
 
     def pop_min(self, node):
+        pass
 
 
-
-    def delete(self, val):
-        if self.root.val == val:
-            if self.root.left is None and self.root.right is None:
-                self.root = None
-            elif self.root.left != None and self.root.right == None:
-                self.root = self.root.left
-            elif self.root.left == None and self.root.right != None:
-                self.root = self.root.left
-            else:
+    # def delete(self, val):
+    #     if self.root.val == val:
+    #         if self.root.left is None and self.root.right is None:
+    #             self.root = None
+    #         elif self.root.left != None and self.root.right == None:
+    #             self.root = self.root.left
+    #         elif self.root.left == None and self.root.right != None:
+    #             self.root = self.root.left
+    #         else:
                 # РЕКУРСИЯ НАЙТИ В ИНЕТЕ
 
 
 
-tree = BinarySearchTree()
-tree.insert(5)
-tree.insert(3)
-tree.insert(6)
-
-print(tree.find(3))
+# tree = BinarySearchTree()
+# tree.insert(5)
+# tree.insert(3)
+# tree.insert(6)
+#
+# print(tree.find(3))
 
 
 
